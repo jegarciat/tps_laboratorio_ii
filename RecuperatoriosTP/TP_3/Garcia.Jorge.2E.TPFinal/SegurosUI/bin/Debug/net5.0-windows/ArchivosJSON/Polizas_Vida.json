@@ -1,0 +1,202 @@
+[
+  {
+    "Fumador": true,
+    "DNI": 4716883,
+    "Nombre": "Melli",
+    "Apellido": "Snellman",
+    "Sexo": 1,
+    "Edad": 20,
+    "Costo": 11493,
+    "SumaAsegurada": 3831056
+  },
+  {
+    "Fumador": true,
+    "DNI": 6058627,
+    "Nombre": "Carol",
+    "Apellido": "Van Schafflaer",
+    "Sexo": 2,
+    "Edad": 35,
+    "Costo": 18624,
+    "SumaAsegurada": 4656008
+  },
+  {
+    "Fumador": true,
+    "DNI": 4343082,
+    "Nombre": "Egon",
+    "Apellido": "Mattei",
+    "Sexo": 1,
+    "Edad": 28,
+    "Costo": 6673,
+    "SumaAsegurada": 2224431
+  },
+  {
+    "Fumador": true,
+    "DNI": 6724741,
+    "Nombre": "Saba",
+    "Apellido": "March",
+    "Sexo": 2,
+    "Edad": 47,
+    "Costo": 15720,
+    "SumaAsegurada": 3930007
+  },
+  {
+    "Fumador": true,
+    "DNI": 8610242,
+    "Nombre": "Todd",
+    "Apellido": "Klimowski",
+    "Sexo": 1,
+    "Edad": 55,
+    "Costo": 13834,
+    "SumaAsegurada": 2766762
+  },
+  {
+    "Fumador": true,
+    "DNI": 4632812,
+    "Nombre": "Donelle",
+    "Apellido": "Fooks",
+    "Sexo": 2,
+    "Edad": 59,
+    "Costo": 22732,
+    "SumaAsegurada": 4546408
+  },
+  {
+    "Fumador": true,
+    "DNI": 9612458,
+    "Nombre": "Hilario",
+    "Apellido": "Gawkes",
+    "Sexo": 1,
+    "Edad": 65,
+    "Costo": 22447,
+    "SumaAsegurada": 3741147
+  },
+  {
+    "Fumador": true,
+    "DNI": 6535275,
+    "Nombre": "Gerald",
+    "Apellido": "Martlew",
+    "Sexo": 2,
+    "Edad": 78,
+    "Costo": 12218,
+    "SumaAsegurada": 2036373
+  },
+  {
+    "Fumador": true,
+    "DNI": 7194426,
+    "Nombre": "Dorree",
+    "Apellido": "Sarfat",
+    "Sexo": 1,
+    "Edad": 42,
+    "Costo": 9947,
+    "SumaAsegurada": 2486732
+  },
+  {
+    "Fumador": true,
+    "DNI": 6695172,
+    "Nombre": "Luisa",
+    "Apellido": "Diben",
+    "Sexo": 2,
+    "Edad": 25,
+    "Costo": 14875,
+    "SumaAsegurada": 4958357
+  },
+  {
+    "Fumador": false,
+    "DNI": 1921891,
+    "Nombre": "Ginnie",
+    "Apellido": "Meneer",
+    "Sexo": 1,
+    "Edad": 28,
+    "Costo": 2545,
+    "SumaAsegurada": 2827856
+  },
+  {
+    "Fumador": false,
+    "DNI": 3566851,
+    "Nombre": "Mattie",
+    "Apellido": "Cornfoot",
+    "Sexo": 2,
+    "Edad": 29,
+    "Costo": 4422,
+    "SumaAsegurada": 4912779
+  },
+  {
+    "Fumador": false,
+    "DNI": 5221206,
+    "Nombre": "Tadeas",
+    "Apellido": "Davinet",
+    "Sexo": 1,
+    "Edad": 23,
+    "Costo": 4438,
+    "SumaAsegurada": 4930568
+  },
+  {
+    "Fumador": false,
+    "DNI": 8017328,
+    "Nombre": "Maurice",
+    "Apellido": "McTurlough",
+    "Sexo": 2,
+    "Edad": 50,
+    "Costo": 2319,
+    "SumaAsegurada": 1159309
+  },
+  {
+    "Fumador": false,
+    "DNI": 8102736,
+    "Nombre": "Vasily",
+    "Apellido": "Keener",
+    "Sexo": 1,
+    "Edad": 67,
+    "Costo": 9655,
+    "SumaAsegurada": 3218192
+  },
+  {
+    "Fumador": false,
+    "DNI": 6417120,
+    "Nombre": "Baird",
+    "Apellido": "Blankenship",
+    "Sexo": 2,
+    "Edad": 24,
+    "Costo": 1800,
+    "SumaAsegurada": 2000359
+  },
+  {
+    "Fumador": false,
+    "DNI": 3163768,
+    "Nombre": "Lynn",
+    "Apellido": "Derrick",
+    "Sexo": 1,
+    "Edad": 34,
+    "Costo": 3548,
+    "SumaAsegurada": 3548499
+  },
+  {
+    "Fumador": false,
+    "DNI": 9571836,
+    "Nombre": "Zaccaria",
+    "Apellido": "Capron",
+    "Sexo": 2,
+    "Edad": 58,
+    "Costo": 4220,
+    "SumaAsegurada": 2110139
+  },
+  {
+    "Fumador": false,
+    "DNI": 4940190,
+    "Nombre": "Aluin",
+    "Apellido": "Sisland",
+    "Sexo": 1,
+    "Edad": 36,
+    "Costo": 2372,
+    "SumaAsegurada": 2372314
+  },
+  {
+    "Fumador": false,
+    "DNI": 6568443,
+    "Nombre": "Concordia",
+    "Apellido": "Wards",
+    "Sexo": 2,
+    "Edad": 29,
+    "Costo": 3324,
+    "SumaAsegurada": 3693485
+  }
+]
