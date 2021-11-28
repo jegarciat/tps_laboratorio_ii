@@ -43,9 +43,20 @@ namespace SegurosUI
             this.btnExportXml = new System.Windows.Forms.Button();
             this.btnExportJson = new System.Windows.Forms.Button();
             this.grpFiltros = new System.Windows.Forms.GroupBox();
+            this.btnFumadores = new System.Windows.Forms.Button();
+            this.btnHombresAsegurados = new System.Windows.Forms.Button();
+            this.btnMoto = new System.Windows.Forms.Button();
+            this.btnTodoMujeres = new System.Windows.Forms.Button();
+            this.btnNoFumadores = new System.Windows.Forms.Button();
+            this.btnAuto = new System.Windows.Forms.Button();
             this.lblExportar = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.lbl_TituloSeguro = new System.Windows.Forms.Label();
+            this.picSeguro = new System.Windows.Forms.PictureBox();
+            this.lblMostrar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPolizas)).BeginInit();
+            this.grpFiltros.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSeguro)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvPolizas
@@ -71,7 +82,7 @@ namespace SegurosUI
             this.dgvPolizas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPolizas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPolizas.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dgvPolizas.Location = new System.Drawing.Point(11, 180);
+            this.dgvPolizas.Location = new System.Drawing.Point(11, 179);
             this.dgvPolizas.MultiSelect = false;
             this.dgvPolizas.Name = "dgvPolizas";
             this.dgvPolizas.ReadOnly = true;
@@ -79,6 +90,7 @@ namespace SegurosUI
             this.dgvPolizas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPolizas.Size = new System.Drawing.Size(728, 254);
             this.dgvPolizas.TabIndex = 12;
+            this.dgvPolizas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPolizas_CellDoubleClick);
             // 
             // btnAgregar
             // 
@@ -184,13 +196,85 @@ namespace SegurosUI
             // 
             // grpFiltros
             // 
+            this.grpFiltros.Controls.Add(this.btnFumadores);
+            this.grpFiltros.Controls.Add(this.btnHombresAsegurados);
+            this.grpFiltros.Controls.Add(this.btnMoto);
+            this.grpFiltros.Controls.Add(this.btnTodoMujeres);
+            this.grpFiltros.Controls.Add(this.btnNoFumadores);
+            this.grpFiltros.Controls.Add(this.btnAuto);
             this.grpFiltros.Font = new System.Drawing.Font("Segoe UI", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.grpFiltros.Location = new System.Drawing.Point(212, 12);
+            this.grpFiltros.Location = new System.Drawing.Point(212, 33);
             this.grpFiltros.Name = "grpFiltros";
-            this.grpFiltros.Size = new System.Drawing.Size(527, 162);
+            this.grpFiltros.Size = new System.Drawing.Size(527, 140);
             this.grpFiltros.TabIndex = 22;
             this.grpFiltros.TabStop = false;
             this.grpFiltros.Text = "Filtros";
+            // 
+            // btnFumadores
+            // 
+            this.btnFumadores.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnFumadores.Location = new System.Drawing.Point(270, 32);
+            this.btnFumadores.Name = "btnFumadores";
+            this.btnFumadores.Size = new System.Drawing.Size(240, 28);
+            this.btnFumadores.TabIndex = 27;
+            this.btnFumadores.Text = "Fumadores asegurados";
+            this.btnFumadores.UseVisualStyleBackColor = true;
+            this.btnFumadores.Click += new System.EventHandler(this.btnFumadores_Click);
+            // 
+            // btnHombresAsegurados
+            // 
+            this.btnHombresAsegurados.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnHombresAsegurados.Location = new System.Drawing.Point(24, 66);
+            this.btnHombresAsegurados.Name = "btnHombresAsegurados";
+            this.btnHombresAsegurados.Size = new System.Drawing.Size(240, 28);
+            this.btnHombresAsegurados.TabIndex = 26;
+            this.btnHombresAsegurados.Text = "Hombres asegurados";
+            this.btnHombresAsegurados.UseVisualStyleBackColor = true;
+            this.btnHombresAsegurados.Click += new System.EventHandler(this.btnHombresAsegurados_Click);
+            // 
+            // btnMoto
+            // 
+            this.btnMoto.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnMoto.Location = new System.Drawing.Point(270, 100);
+            this.btnMoto.Name = "btnMoto";
+            this.btnMoto.Size = new System.Drawing.Size(240, 28);
+            this.btnMoto.TabIndex = 33;
+            this.btnMoto.Text = "Pólizas de moto";
+            this.btnMoto.UseVisualStyleBackColor = true;
+            this.btnMoto.Click += new System.EventHandler(this.btnMoto_Click);
+            // 
+            // btnTodoMujeres
+            // 
+            this.btnTodoMujeres.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnTodoMujeres.Location = new System.Drawing.Point(24, 32);
+            this.btnTodoMujeres.Name = "btnTodoMujeres";
+            this.btnTodoMujeres.Size = new System.Drawing.Size(240, 28);
+            this.btnTodoMujeres.TabIndex = 25;
+            this.btnTodoMujeres.Text = "Mujeres aseguradas";
+            this.btnTodoMujeres.UseVisualStyleBackColor = true;
+            this.btnTodoMujeres.Click += new System.EventHandler(this.btnTodoMujeres_Click);
+            // 
+            // btnNoFumadores
+            // 
+            this.btnNoFumadores.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnNoFumadores.Location = new System.Drawing.Point(270, 66);
+            this.btnNoFumadores.Name = "btnNoFumadores";
+            this.btnNoFumadores.Size = new System.Drawing.Size(240, 28);
+            this.btnNoFumadores.TabIndex = 28;
+            this.btnNoFumadores.Text = "No fumadores";
+            this.btnNoFumadores.UseVisualStyleBackColor = true;
+            this.btnNoFumadores.Click += new System.EventHandler(this.btnNoFumadores_Click);
+            // 
+            // btnAuto
+            // 
+            this.btnAuto.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAuto.Location = new System.Drawing.Point(24, 100);
+            this.btnAuto.Name = "btnAuto";
+            this.btnAuto.Size = new System.Drawing.Size(240, 28);
+            this.btnAuto.TabIndex = 32;
+            this.btnAuto.Text = "Pólizas de auto";
+            this.btnAuto.UseVisualStyleBackColor = true;
+            this.btnAuto.Click += new System.EventHandler(this.btnAuto_Click);
             // 
             // lblExportar
             // 
@@ -212,12 +296,45 @@ namespace SegurosUI
             this.lblTitulo.TabIndex = 24;
             this.lblTitulo.Text = "Titulo";
             // 
+            // lbl_TituloSeguro
+            // 
+            this.lbl_TituloSeguro.AutoSize = true;
+            this.lbl_TituloSeguro.Font = new System.Drawing.Font("Segoe UI", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lbl_TituloSeguro.Location = new System.Drawing.Point(420, 9);
+            this.lbl_TituloSeguro.Name = "lbl_TituloSeguro";
+            this.lbl_TituloSeguro.Size = new System.Drawing.Size(107, 25);
+            this.lbl_TituloSeguro.TabIndex = 25;
+            this.lbl_TituloSeguro.Text = "Seguros JG";
+            // 
+            // picSeguro
+            // 
+            this.picSeguro.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picSeguro.BackgroundImage")));
+            this.picSeguro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picSeguro.Location = new System.Drawing.Point(13, 12);
+            this.picSeguro.Name = "picSeguro";
+            this.picSeguro.Size = new System.Drawing.Size(193, 40);
+            this.picSeguro.TabIndex = 26;
+            this.picSeguro.TabStop = false;
+            // 
+            // lblMostrar
+            // 
+            this.lblMostrar.AutoSize = true;
+            this.lblMostrar.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.lblMostrar.Location = new System.Drawing.Point(252, 427);
+            this.lblMostrar.Name = "lblMostrar";
+            this.lblMostrar.Size = new System.Drawing.Size(251, 13);
+            this.lblMostrar.TabIndex = 28;
+            this.lblMostrar.Text = "Para exportar una póliza hacer doble click en la fila";
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(755, 500);
+            this.Controls.Add(this.lblMostrar);
+            this.Controls.Add(this.picSeguro);
+            this.Controls.Add(this.lbl_TituloSeguro);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.lblExportar);
             this.Controls.Add(this.grpFiltros);
@@ -239,6 +356,8 @@ namespace SegurosUI
             this.Text = "Seguros JG";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPolizas)).EndInit();
+            this.grpFiltros.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picSeguro)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,6 +378,15 @@ namespace SegurosUI
         private System.Windows.Forms.GroupBox grpFiltros;
         private System.Windows.Forms.Label lblExportar;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Button btnNoFumadores;
+        private System.Windows.Forms.Button btnFumadores;
+        private System.Windows.Forms.Button btnHombresAsegurados;
+        private System.Windows.Forms.Button btnTodoMujeres;
+        private System.Windows.Forms.Label lbl_TituloSeguro;
+        private System.Windows.Forms.PictureBox picSeguro;
+        private System.Windows.Forms.Button btnMoto;
+        private System.Windows.Forms.Button btnAuto;
+        private System.Windows.Forms.Label lblMostrar;
     }
 }
 

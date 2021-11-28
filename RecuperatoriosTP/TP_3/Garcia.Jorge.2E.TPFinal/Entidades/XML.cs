@@ -13,6 +13,12 @@ namespace Entidades
             ruta = AppDomain.CurrentDomain.BaseDirectory + @"\ArchivosXML\";
         }
 
+        /// <summary>
+        /// Metodo que lee un archivo
+        /// </summary>
+        /// <param name="nombreArchivo">String que indica donde se encuentra el archivo a leer</param>
+        /// <param name="info">Indica donde se va a guardar lo leido</param>
+        /// <returns>Retorna true si pudo leerlo, false si no</returns>
         public bool Exportar(string nombreArchivo, T info)
         {
             string rutaDefinitiva = ruta + nombreArchivo;
@@ -33,6 +39,11 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Método que lee un archivo
+        /// </summary>
+        /// <param name="nombreArchivo">String que indica donde se encuentra el archivo a leer</param>
+        /// <returns>Retorna true si pudo leerlo, false si no</returns>
         public T Importar(string nombreArchivo)
         {
             string rutaDefinitiva = ruta + nombreArchivo;

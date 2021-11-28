@@ -12,10 +12,5 @@ namespace Entidades
         {
 
         }
-
-        public ArchivoException(string mensaje, Exception inner) : base(mensaje, inner)
-        {
-
-        }
     }
 }

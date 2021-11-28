@@ -9,87 +9,40 @@ namespace Entidades
         private static List<PolizaVehiculo> polizasVehiculo;
         private static List<PolizaVida> polizasVida;
         private static List<Poliza> polizasTodas;
-        private static int numInforme;
 
         static Suscripciones()
         {
             polizasVehiculo = new List<PolizaVehiculo>();
             polizasVida = new List<PolizaVida>();
             polizasTodas = new List<Poliza>();
-
-            //JSON<List<PolizaVehiculo>> jsonVehiculo = new JSON<List<PolizaVehiculo>>();
-            //JSON<List<PolizaVida>> jsonVida = new JSON<List<PolizaVida>>();
-
-            //jsonVehiculo.Exportar("Polizas_Vehiculo2.json", polizasVehiculo);
-            //jsonVida.Exportar("Polizas_Vida2.json", polizasVida);
-
-            //XML<List<PolizaVehiculo>> vehiculosXml = new XML<List<PolizaVehiculo>>();
-            //XML<List<PolizaVida>> vidaXml = new XML<List<PolizaVida>>();
-
-            //vehiculosXml.Exportar("Polizas_Vehiculo.xml", polizasVehiculo);
-            //vidaXml.Exportar("Polizas_Vida.xml", polizasVida);
         }
 
-        #region Harcodeo
-
-        //public static void CargarPolizasVida()
-        //{
-        //    double sumaAseguradaRandom = 1000000;
-
-        //    for (int i = 0; i < 10; i++)
-        //    {
-        //        //sumaAseguradaRandom = new Random().Next(1000000, 5000000);
-        //        polizasVida.Add(new PolizaVida(clientes[i].Nombre, clientes[i].Apellido, clientes[i].DNI, clientes[i].Sexo, clientes[i].Edad, sumaAseguradaRandom, true));
-        //    }
-        //    for (int i = 10; i < 20; i++)
-        //    {
-        //        //sumaAseguradaRandom = new Random().Next(1000000, 5000000);
-        //        polizasVida.Add(new PolizaVida(clientes[i].Nombre, clientes[i].Apellido, clientes[i].DNI, clientes[i].Sexo, clientes[i].Edad, sumaAseguradaRandom, false));
-        //    }
-        //}
-
-        //public static void CargarPolizasVehiculos()
-        //{
-        //    double sumaAseguradaRandom = 1000000;
-        //    int anioRandom;
-        //    ETipo eTipoRandom;
-
-        //    for (int i = 20; i < 40; i++)
-        //    {
-        //        //sumaAseguradaRandom = new Random().Next(1000000, 3000000);
-        //        anioRandom = new Random().Next(2000, 2022);
-        //        eTipoRandom = (ETipo)new Random().Next(1, 4);
-        //        polizasVehiculo.Add(new PolizaVehiculo(clientes[i].Nombre, clientes[i].Apellido, clientes[i].DNI, clientes[i].Sexo, clientes[i].Edad, sumaAseguradaRandom, anioRandom, eTipoRandom));
-        //    }
-
-        //}
-
-        #endregion
-
+        /// <summary>
+        /// Se encarga de importar las pólizas de vida en formato .XML
+        /// </summary>
+        /// <returns>La lista de pólizas o un ArchivoException en caso de error al importar.</returns>
         public static List<PolizaVida> CargarPolizasVida()
         {
             try
             {
-                //JSON<List<PolizaVida>> json = new JSON<List<PolizaVida>>();
-                //return json.Importar("Polizas_Vida.json");
-
                 XML<List<PolizaVida>> vidaXml = new XML<List<PolizaVida>>();
                 List<PolizaVida> lista = vidaXml.Importar("Polizas_Vida.xml");
                 return lista;
             }
             catch (ArchivoException ex)
             {
-                throw new ArchivoException($"{ex.Message}");
+                throw new ArchivoException(ex.Message);
             }
         }
 
+        /// <summary>
+        /// Se encarga de importar las pólizas de vehiculo en formato .XML
+        /// </summary>
+        /// <returns>La lista de pólizas o un ArchivoException en caso de error al importar.</returns>
         public static List<PolizaVehiculo> CargarPolizasVehiculos()
         {
             try
             {
-                //JSON<List<PolizaVehiculo>> json = new JSON<List<PolizaVehiculo>>();
-                //return json.Importar("Polizas_Vehiculo.json");
-
                 XML<List<PolizaVehiculo>> vehiculosXml = new XML<List<PolizaVehiculo>>();
                 List<PolizaVehiculo> lista = vehiculosXml.Importar("Polizas_Vehiculo.xml");
                 return lista;
@@ -140,39 +93,34 @@ namespace Entidades
 
                 polizasTodas.AddRange(PolizasVida);
                 polizasTodas.AddRange(PolizasVehiculos);
-                List<Poliza> polizas = polizasTodas.OrderBy(x => x.DNI).ToList();
 
-                return polizas;
+                return polizasTodas;
             }
         }
 
-        public static List<T> Filtrar<T>(Predicate<T> predicate) where T : Poliza
+        /// <summary>
+        /// Elimina un póliza de la lista de su tipo.
+        /// </summary>
+        /// <param name="poliza"></param>
+        /// <returns>true en caso de exito, o una exception en error.</returns>
+        public static bool Eliminar(Poliza poliza)
         {
-            List<T> listaFiltrada = new List<T>();
-
-            return listaFiltrada.FindAll(predicate);
-        }
-
-        public static void Eliminar(Poliza poliza)
-        {
-            if (EsPolizaVehiculo(poliza))
+            if (poliza is PolizaVehiculo)
             {
                 PolizaVehiculo auxiliar = PolizasVehiculos.Find((x) => x.DNI == poliza.DNI);
-                PolizasVehiculos.Remove(auxiliar);
+                if(PolizasVehiculos.Remove(auxiliar))
+                    return true;
+                else
+                    throw new Exception();
             }
             else
             {
                 PolizaVida auxiliar = PolizasVida.Find((x) => x.DNI == poliza.DNI);
-                PolizasVida.Remove(auxiliar);
+                if (PolizasVida.Remove(auxiliar))
+                    return true;
+                else
+                    throw new Exception();
             }
-        }
-
-        private static bool EsPolizaVehiculo(Poliza poliza)
-        {
-            if (poliza is PolizaVehiculo)
-                return true;
-            else
-                return false;
         }
     }
 }

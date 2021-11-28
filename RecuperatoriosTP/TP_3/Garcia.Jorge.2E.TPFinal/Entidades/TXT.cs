@@ -18,6 +18,12 @@ namespace Entidades
 
         public static string Ruta { get => ruta; set => ruta = value; }
 
+        /// <summary>
+        /// Exporta en un archivo txt la información pasada por parámetro.
+        /// </summary>
+        /// <param name="nombreArchivo"></param>
+        /// <param name="info"></param>
+        /// <returns>true si la pudo exportar con exito, exception en caso de error.</returns>
         public bool Exportar(string nombreArchivo, string info)
         {
             string rutaDefinitiva = ruta + nombreArchivo;
@@ -37,6 +43,11 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Importa la información y la devuelve en un string.
+        /// </summary>
+        /// <param name="nombreArchivo"></param>
+        /// <returns>string en caso de exito, excepcion en caso de error.</returns>
         public string Importar(string nombreArchivo)
         {
             string informacion; 

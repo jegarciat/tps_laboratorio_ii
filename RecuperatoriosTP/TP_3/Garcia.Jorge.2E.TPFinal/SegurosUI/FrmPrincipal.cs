@@ -8,10 +8,13 @@ namespace SegurosUI
     public partial class FrmPrincipal : Form
     {
         private static int numInforme;
-
+        private BindingSource manejador;
+        private TXT txt;
         public FrmPrincipal()
         {
             InitializeComponent();
+            manejador = new BindingSource();
+            txt = new TXT();
         }
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
@@ -21,8 +24,7 @@ namespace SegurosUI
                 Suscripciones.PolizasVehiculos = Suscripciones.CargarPolizasVehiculos();
                 Suscripciones.PolizasVida = Suscripciones.CargarPolizasVida();
                 dgvPolizas.DataSource = Suscripciones.TodasLasPolizas;
-                this.btnEliminar.Enabled = false;
-                this.btnModificar.Enabled = false;
+                manejador.DataSource = dgvPolizas.DataSource;
                 this.lblTitulo.Text = "TodasLasPolizas";
                 this.lblTitulo.Visible = false;
             }
@@ -34,47 +36,46 @@ namespace SegurosUI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            BindingSource manejadorDeInfo = new BindingSource();
             FrmGestionPoliza frmGestion = new FrmGestionPoliza();
-            manejadorDeInfo.DataSource = dgvPolizas.DataSource;
-
             if (frmGestion.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show("Poliza agregada exitosamente", "Cliente asegurado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                dgvPolizas.DataSource = manejadorDeInfo;
-                manejadorDeInfo.ResetBindings(false);
+                dgvPolizas.DataSource = Suscripciones.TodasLasPolizas;
             }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            BindingSource manejadorDeInfo = new BindingSource();
-            manejadorDeInfo.DataSource = dgvPolizas.DataSource;
-
             if (this.dgvPolizas.SelectedRows.Count > 0)
             {
+                manejador.DataSource = null;
+                manejador.DataSource = dgvPolizas.DataSource;
+
                 FrmGestionPoliza frmGestion = new FrmGestionPoliza((Poliza)dgvPolizas.CurrentRow.DataBoundItem);
 
                 if (frmGestion.ShowDialog() == DialogResult.OK)
-                {
-                    dgvPolizas.DataSource = manejadorDeInfo;
-                    manejadorDeInfo.ResetBindings(false);
+                {                    
+                    dgvPolizas.DataSource = manejador;
+                    manejador.ResetBindings(false);
                 }
             }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            BindingSource manejadorDeInfo = new BindingSource();
-            manejadorDeInfo.DataSource = dgvPolizas.DataSource;
-
             if (this.dgvPolizas.SelectedRows.Count > 0)
             {
                 try
                 {
-                    Suscripciones.Eliminar((Poliza)dgvPolizas.CurrentRow.DataBoundItem);
-                    dgvPolizas.DataSource = manejadorDeInfo;
-                    manejadorDeInfo.ResetBindings(false);
+                    manejador.DataSource = null;
+                    manejador.DataSource = dgvPolizas.DataSource;
+
+                    if (Suscripciones.Eliminar((Poliza)dgvPolizas.CurrentRow.DataBoundItem))
+                    {
+                        dgvPolizas.DataSource = manejador;
+                        manejador.ResetBindings(false);
+                        MessageBox.Show("Póliza eliminada. Recargue la lista para el el cambio.", "Eliminacion exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
                 catch (Exception)
                 {
@@ -85,26 +86,22 @@ namespace SegurosUI
 
         private void btnListarTodos_Click(object sender, EventArgs e)
         {
-            this.btnEliminar.Enabled = false;
-            this.btnModificar.Enabled = false;
             this.lblTitulo.Text = "TodasLasPolizas";
-
-            this.dgvPolizas.Update();
-            this.dgvPolizas.Refresh();
+            ConfigurarPorListado();
             dgvPolizas.DataSource = Suscripciones.TodasLasPolizas;
         }
 
         private void btn_ListarSegurosVida_Click(object sender, EventArgs e)
         {
-            ConfigurarPorListado();
             this.lblTitulo.Text = "PolizasVida";
+            ConfigurarPorListado();
             dgvPolizas.DataSource = Suscripciones.PolizasVida;
         }
 
         private void btnListarVehiculos_Click(object sender, EventArgs e)
         {
-            ConfigurarPorListado();
             this.lblTitulo.Text = "PolizasVehiculos";
+            ConfigurarPorListado();
             dgvPolizas.DataSource = Suscripciones.PolizasVehiculos;
         }
 
@@ -116,19 +113,21 @@ namespace SegurosUI
 
         private void btnExportXml_Click(object sender, EventArgs e)
         {
-            BindingSource manejadorDeInfo = new BindingSource();
-            manejadorDeInfo.DataSource = dgvPolizas.DataSource;
+            manejador.DataSource = null;
+            manejador.DataSource = dgvPolizas.DataSource;
             string formato = $"{this.lblTitulo.Text}{numInforme}_{DateTime.Now.ToString("dd_mm_yyyy")}.xml";
             List<Poliza> polizas = new List<Poliza>();
             XML<List<Poliza>> serializador = new XML<List<Poliza>>();
 
             try
-            {
-                for (int i = 0; i < manejadorDeInfo.Count; i++)
+            {                
+                for (int i = 0; i < manejador.Count; i++)
                 {
-                    polizas.Add((Poliza)manejadorDeInfo.Current);
-                    manejadorDeInfo.MoveNext();
+                    polizas.Add((Poliza)manejador.Current);
+                    manejador.MoveNext();
                 }
+
+                manejador.ResetBindings(false);
 
                 if (serializador.Exportar(formato, polizas))
                 {
@@ -147,19 +146,21 @@ namespace SegurosUI
 
         private void btnExportJson_Click(object sender, EventArgs e)
         {
-            BindingSource manejadorDeInfo = new BindingSource();
-            manejadorDeInfo.DataSource = dgvPolizas.DataSource;
+            manejador.DataSource = null;
+            manejador.DataSource = dgvPolizas.DataSource;
             string archivo = $"{this.lblTitulo.Text}{numInforme}_{DateTime.Now.ToString("dd_mm_yyyy")}.json";
             List<Poliza> polizas = new List<Poliza>();
             JSON<List<Poliza>> serializador = new JSON<List<Poliza>>();
 
             try
             {
-                for (int i = 0; i < manejadorDeInfo.Count; i++)
+                for (int i = 0; i < manejador.Count; i++)
                 {
-                    polizas.Add((Poliza)manejadorDeInfo.Current);
-                    manejadorDeInfo.MoveNext();
+                    polizas.Add((Poliza)manejador.Current);
+                    manejador.MoveNext();
                 }
+
+                manejador.ResetBindings(false);
 
                 if (serializador.Exportar(archivo, polizas))
                 {
@@ -176,12 +177,82 @@ namespace SegurosUI
             }
         }
 
+        /// <summary>
+        /// Se encarga de refrescar el datagridview
+        /// </summary>
         private void ConfigurarPorListado()
         {
             this.dgvPolizas.Update();
             this.dgvPolizas.Refresh();
-            this.btnEliminar.Enabled = true;
-            this.btnModificar.Enabled = true;
+        }
+
+        private void btnTodoMujeres_Click(object sender, EventArgs e)
+        {
+            this.lblTitulo.Text = "MujeresAseguradas";
+            Filtrar(Suscripciones.TodasLasPolizas, (x) => x.Sexo == ESexo.Mujer);
+        }
+
+        private void btnHombresAsegurados_Click(object sender, EventArgs e)
+        {
+            this.lblTitulo.Text = "HombresAsegurados";
+            Filtrar(Suscripciones.TodasLasPolizas, (x) => x.Sexo == ESexo.Hombre);
+        }
+
+        private void btnFumadores_Click(object sender, EventArgs e)
+        {
+            this.lblTitulo.Text = "Fumadores";
+            Filtrar(Suscripciones.PolizasVida, (x) => x.Fumador == true);
+        }
+
+        private void btnNoFumadores_Click(object sender, EventArgs e)
+        {
+            this.lblTitulo.Text = "NoFumadores";
+            Filtrar(Suscripciones.PolizasVida, (x) => x.Fumador == false);
+        }
+
+        private void btnAuto_Click(object sender, EventArgs e)
+        {
+            this.lblTitulo.Text = "Autos";
+            Filtrar(Suscripciones.PolizasVehiculos, (x) => x.TipoVehiculo == ETipo.Auto);
+        }
+
+        private void btnMoto_Click(object sender, EventArgs e)
+        {
+            this.lblTitulo.Text = "Motos";
+            Filtrar(Suscripciones.PolizasVehiculos, (x) => x.TipoVehiculo == ETipo.Moto);
+        }
+
+        /// <summary>
+        /// Funcion que filtra la lista genérica a partir del criterio pasado por parámetro y actualiza el DataGridView
+        /// con la lista filtrada.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="lista"></param>
+        /// <param name="predicate"></param>
+        private void Filtrar<T>(List<T> lista, Predicate<T> predicate) where T: Poliza
+        {
+            manejador.DataSource = null;
+            manejador.DataSource = lista.FindAll(predicate);
+            dgvPolizas.DataSource = manejador.DataSource;
+            manejador.ResetBindings(false);
+        }
+
+        private void dgvPolizas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Poliza poliza = (Poliza)dgvPolizas.CurrentRow.DataBoundItem;
+
+            if (MessageBox.Show($"{poliza.Informacion()}\n\n ¿Desea exportar la póliza?", "Detalle de póliza", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    if (txt.Exportar($"Póliza_{poliza.Nombre}.txt", poliza.Informacion()))
+                        MessageBox.Show("¡Póliza exportada con exito!", "Lista exportada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (ArchivoException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }

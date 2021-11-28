@@ -35,7 +35,7 @@ namespace Entidades
                 }
                 else
                 {
-                    throw new AnioException("El año ingresado es inválido. Solo aseguramos vehiculos fabricados a partir del año 1980.");
+                    throw new ClienteException("El año ingresado es inválido. Solo aseguramos vehiculos fabricados a partir del año 1980.");
                 }
             }
         }
@@ -64,6 +64,10 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Calcula la tasa a aplicar dependiendo de la antiguedad del vehiculo que se quiere asegurar.
+        /// </summary>
+        /// <returns></returns>
         protected override float CalcularTasa()
         {
             float tasa = 0.0008F;
@@ -85,6 +89,10 @@ namespace Entidades
             return tasa;
         }
 
+        /// <summary>
+        /// Recopila y devuelve los datos de la póliza.
+        /// </summary>
+        /// <returns></returns>
         public override string Informacion()
         {
             StringBuilder sb = new StringBuilder();

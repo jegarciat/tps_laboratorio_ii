@@ -46,6 +46,10 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Calcula la tasa de la póliza dependiendo de si es fumador o no el cliente y de la edad del mismo.
+        /// </summary>
+        /// <returns>la tasa que se debe aplicar</returns>
         protected override float CalcularTasa()
         {
             int edad = this.Edad;
@@ -60,6 +64,11 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Calcula la tasa de un cliente fumador dependiendo de la edad.
+        /// </summary>
+        /// <param name="edad"></param>
+        /// <returns></returns>
         public float CalcularTasaFumador(int edad)
         {
             if (edad > 17 && edad < 30)
@@ -80,6 +89,11 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Calcula la tasa de un cliente no fumador dependiendo de la edad.
+        /// </summary>
+        /// <param name="edad"></param>
+        /// <returns></returns>
         public float CalcularTasaNoFumador(int edad)
         {
             if (edad > 17 && edad < 30)
@@ -100,13 +114,17 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Recopila y devuelve los datos de la póliza.
+        /// </summary>
+        /// <returns></returns>
         public override string Informacion()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine($"Poliza - Seguro de vida");
             sb.AppendLine(base.Informacion());
-            sb.AppendLine($"Costo anual: {this.Costo}");
+            sb.Append($"Costo anual: {this.Costo}");
 
             return sb.ToString();
         }

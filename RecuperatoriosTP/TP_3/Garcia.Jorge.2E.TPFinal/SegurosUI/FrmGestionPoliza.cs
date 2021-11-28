@@ -164,10 +164,6 @@ namespace SegurosUI
             {
                 MessageBox.Show(ex.Message, "Error en los datos del cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (AnioException ex)
-            {
-                MessageBox.Show(ex.Message, "Error en el año del vehículo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -201,10 +197,6 @@ namespace SegurosUI
             catch (ClienteException ex)
             {
                 MessageBox.Show(ex.Message, "Error en los datos del cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (AnioException ex)
-            {
-                MessageBox.Show(ex.Message, "Error en el año del vehículo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

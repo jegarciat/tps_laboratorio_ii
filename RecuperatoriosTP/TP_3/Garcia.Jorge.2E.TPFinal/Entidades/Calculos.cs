@@ -33,6 +33,10 @@ namespace Entidades
             totalHombres = Suscripciones.TodasLasPolizas.FindAll((x) => x.Sexo == ESexo.Hombre).Count();
         }
 
+        /// <summary>
+        /// Método que recopila todas la estadísticas del seguro y las retorna en un string.
+        /// </summary>
+        /// <returns></returns>
         public string Informacion()
         {
             StringBuilder sb = new StringBuilder();
@@ -47,14 +51,27 @@ namespace Entidades
             sb.AppendLine(AnalisisEdad());
             sb.AppendLine(AnalisisFumadores());
             sb.AppendLine(AnalisisPorTipoVehiculo());
+            sb.AppendLine(AnalisisAntiguedad());
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Calcula el promedio de los datos pasados por parámetro.
+        /// </summary>
+        /// <param name="total"></param>
+        /// <param name="cantidad"></param>
+        /// <returns></returns>
         private static double Promedio(double total, int cantidad)
         {
             return Math.Round((double)total / cantidad, 3);
         }
 
+        /// <summary>
+        /// Calcula el porcentaje de los números pasados por parámetro.
+        /// </summary>
+        /// <param name="total"></param>
+        /// <param name="cantidad"></param>
+        /// <returns></returns>
         private static int Porcentaje(int total, int cantidad)
         {
             int porcentaje = cantidad * 100 / total;
@@ -62,6 +79,12 @@ namespace Entidades
             return porcentaje;
         }
 
+        /// <summary>
+        /// Calcula el procentaje de los números pasados por parámetro.
+        /// </summary>
+        /// <param name="total"></param>
+        /// <param name="cantidad"></param>
+        /// <returns></returns>
         private static double Porcentaje(double total, double cantidad)
         {
             double porcentaje = cantidad * 100 / total;
@@ -69,6 +92,10 @@ namespace Entidades
             return Math.Round(porcentaje, 3);
         }
 
+        /// <summary>
+        /// Recopila y devuelve los datos referente a la suma asegurada.
+        /// </summary>
+        /// <returns></returns>
         private string AnalisisSumaAsegurada()
         {
             StringBuilder sb = new StringBuilder();
@@ -80,6 +107,10 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Recopila y devuelve los datos referentes a los tipos de vehiculo
+        /// </summary>
+        /// <returns></returns>
         private string AnalisisPorTipoVehiculo()
         {
             StringBuilder sb = new StringBuilder();
@@ -102,6 +133,10 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Recopila y devuelve todos los datos referentes a los fumadores.
+        /// </summary>
+        /// <returns></returns>
         private string AnalisisFumadores()
         {
             StringBuilder sb = new StringBuilder();
@@ -114,9 +149,9 @@ namespace Entidades
             int totalFumadores = totalHombresFumadores + totalMujeresFumadoras;
 
             if (totalHombresFumadores > totalMujeresFumadoras)
-                conclusion = "Los hombres fumadores son más propensos a contratar un seguro de vida que las mujeres fumadores";
+                conclusion = "Los hombres fumadores son más propensos a contratar un seguro de vida que las mujeres fumadores.";
             else if(totalMujeresFumadoras > totalHombresFumadores)
-                conclusion = "Las mujeras fumadores son más propensas a contratar un seguro de vida que los hombres fumadores";
+                conclusion = "Las mujeres fumadoras son más propensas a contratar un seguro de vida que los hombres fumadores.";
 
             sb.AppendLine($"Hombres fumadores: {Porcentaje(totalFumadores, totalHombresFumadores)}%");
             sb.AppendLine($"Mujeres fumadoras: {Porcentaje(totalFumadores, totalMujeresFumadoras)}%");
@@ -130,6 +165,10 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Recopila y devuelve los datos referentes a los costos.
+        /// </summary>
+        /// <returns></returns>
         private string AnalisisCostos()
         {
             StringBuilder sb = new StringBuilder();
@@ -153,6 +192,10 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Recopila y devuelve los datos referentes al sexo.
+        /// </summary>
+        /// <returns></returns>
         private string AnalisisSexo()
         {
             StringBuilder sb = new StringBuilder();
@@ -169,6 +212,10 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Recopila y devuelve los datos referentes a la edad.
+        /// </summary>
+        /// <returns></returns>
         private string AnalisisEdad()
         {
             StringBuilder sb = new StringBuilder();
@@ -176,6 +223,33 @@ namespace Entidades
             sb.AppendLine($"Promedio de edad de los asegurados: {Suscripciones.TodasLasPolizas.PromedioEdad()} años");
             sb.AppendLine($"Promedio de edad en las pólizas de vida: {Suscripciones.PolizasVida.PromedioEdad()} años");
             sb.AppendLine($"Promedio de edad en las pólizas de vehiculo: {Suscripciones.PolizasVehiculos.PromedioEdad()} años");
+
+            return sb.ToString();
+        }
+
+
+        /// <summary>
+        /// Recopila y deuvuelve los datos referentes a la antiguedad.
+        /// </summary>
+        /// <returns></returns>
+        private string AnalisisAntiguedad()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            int antiguedadTotal = 0;
+            int vehiculosConMenosDe5 = 0;
+            int vehiculosConMasde10 = 0;
+
+            List<PolizaVehiculo> auxiliar5 = Suscripciones.PolizasVehiculos.FindAll((x) => x.Anio.CalcularAntiguedad() <= 5);
+            List<PolizaVehiculo> auxiliar10 = Suscripciones.PolizasVehiculos.FindAll((x) => x.Anio.CalcularAntiguedad() > 10);
+            Suscripciones.PolizasVehiculos.ForEach(x => antiguedadTotal += x.Anio.CalcularAntiguedad());
+
+            vehiculosConMenosDe5 = auxiliar5.Count();
+            vehiculosConMasde10 = auxiliar10.Count();
+
+            sb.AppendLine($"Promedio de antiguedad de los vehiculos asegurados: {Promedio(antiguedadTotal, totalPolizasVehiculos)} años");
+            sb.AppendLine($"Porcentaje de vehiculos asegurados con menos de 6 años de fabricación: {Porcentaje(totalPolizasVehiculos, vehiculosConMenosDe5)}%");
+            sb.AppendLine($"Porcentaje de vehiculos asegurados con más de 10 años de fabricación: {Porcentaje(totalPolizasVehiculos, vehiculosConMasde10)}%");
 
             return sb.ToString();
         }

@@ -21,3 +21,4 @@ C:\Users\jorge\source\TrabajosPracticos\RecuperatoriosTP\TP_3\Garcia.Jorge.2E.TP
 C:\Users\jorge\source\TrabajosPracticos\RecuperatoriosTP\TP_3\Garcia.Jorge.2E.TPFinal\SegurosUI\bin\Debug\net5.0-windows\ref\SegurosUI.dll
 C:\Users\jorge\source\TrabajosPracticos\RecuperatoriosTP\TP_3\Garcia.Jorge.2E.TPFinal\SegurosUI\bin\Debug\net5.0-windows\SegurosUI.pdb
 C:\Users\jorge\source\TrabajosPracticos\RecuperatoriosTP\TP_3\Garcia.Jorge.2E.TPFinal\SegurosUI\obj\Debug\net5.0-windows\SegurosUI.FrmEstadisticas.resources
+C:\Users\jorge\source\TrabajosPracticos\RecuperatoriosTP\TP_3\Garcia.Jorge.2E.TPFinal\SegurosUI\obj\Debug\net5.0-windows\SegurosUI.Properties.Resources.resources

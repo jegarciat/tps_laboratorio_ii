@@ -49,13 +49,19 @@ namespace Entidades
             }
             set
             {
-                if (value > 0)
+                try
                 {
-                    this.dni = value;
+                    if(value < 0)
+                        throw new ClienteException("No puede haber un DNI negativo.");
+
+                    if (value > 0 && value.DniUnico())
+                    {
+                        this.dni = value;
+                    }
                 }
-                else
+                catch (ClienteException ex)
                 {
-                    throw new ClienteException("Algo ha salido mal: DNI inválido");
+                    throw new ClienteException($"Algo ha salido mal: DNI inválido. {ex.Message}");
                 }
             }
         }
@@ -68,7 +74,7 @@ namespace Entidades
             }
             set
             {
-                if (!string.IsNullOrWhiteSpace(value))
+                if (!string.IsNullOrWhiteSpace(value) && value.SoloLetras())
                 {
                     this.nombre = value;
                 }
@@ -87,7 +93,7 @@ namespace Entidades
             }
             set
             {
-                if (!string.IsNullOrWhiteSpace(value))
+                if (!string.IsNullOrWhiteSpace(value) && value.SoloLetras())
                 {
                     this.apellido = value;
                 }
@@ -152,39 +158,21 @@ namespace Entidades
         protected abstract float CalcularTasa();
 
         /// <summary>
-        /// Comprueba si 2 polizas son iguales a partir del DNI del asegurado.
+        /// Méodo que recopila y devuelve toda la información de la póliza.
         /// </summary>
-        /// <param name="poliza1"></param>
-        /// <param name="poliza2"></param>
         /// <returns></returns>
-        public static bool operator ==(Poliza poliza1, Poliza poliza2)
-        {
-            return (poliza1 is not null && poliza2 is not null && poliza1.DNI == poliza2.DNI);
-        }
-
-        /// <summary>
-        /// Comprueba si 2 polizas son distintas a partir del DNI del asegurado.
-        /// </summary>
-        /// <param name="persona1"></param>
-        /// <param name="persona2"></param>
-        /// <returns></returns>
-        public static bool operator !=(Poliza poliza1, Poliza poliza2)
-        {
-            return !(poliza1 == poliza2);
-        }
-
         public virtual string Informacion()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine($"Fecha: {DateTime.Now.ToString("dd/MM/yyyy")}");
-            sb.AppendLine($"Información del asegurado");
+            sb.AppendLine($"Fecha: {DateTime.Now.ToString("dd/MM/yyyy")}\n");
+            sb.AppendLine($"Información del asegurado\n");
             sb.AppendLine($"DNI: {this.dni}");
             sb.AppendLine($"Nombre: {this.nombre}");
             sb.AppendLine($"Apellido: {this.apellido}");
             sb.AppendLine($"Edad: {this.edad}");
             sb.AppendLine($"Sexo: {this.sexo}");
-            sb.AppendLine($"Suma asegurada anual: {this.sumaAsegurada}");
+            sb.Append($"Suma asegurada anual: {this.sumaAsegurada}");
 
             return sb.ToString();
         }

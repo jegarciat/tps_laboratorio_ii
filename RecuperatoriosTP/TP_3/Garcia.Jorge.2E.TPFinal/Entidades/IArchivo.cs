@@ -17,7 +17,7 @@ namespace Entidades
         bool Exportar(string nombreArchivo, T info);
 
         /// <summary>
-        /// Lee un archivo en la ruta pasada por parámetro.
+        /// Lee un archivo de la ruta pasada por parámetro.
         /// </summary>
         /// <param name="nombreArchivo">String de donde se leera el archivo</param>
         /// <returns>Retorna el objeto leído</returns>
