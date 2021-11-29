@@ -186,7 +186,6 @@ namespace SegurosUI
                 {
                     polizaVida.Nombre = txtNombre.Text;
                     polizaVida.Apellido = txtApellido.Text;
-                    polizaVida.DNI = int.Parse(txtDni.Text);
                     polizaVida.Sexo = (ESexo)cmbSexo.SelectedItem;
                     polizaVida.Edad = int.Parse(txtEdad.Text);
                     polizaVida.SumaAsegurada = double.Parse(txtSumaAsegurada.Text);

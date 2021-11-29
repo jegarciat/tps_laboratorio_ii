@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
@@ -25,7 +26,25 @@ namespace SegurosUI
             opgRegistros.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
             opgRegistros.FileName = $"RegistroEstadistico_{numero}_{DateTime.Now.ToString("HH:mm:ss")}.txt";
             opgRegistros.Filter = "Archivo de texto|*.txt";
-            this.rtxtContenido.Text = calculos.Informacion();
+            this.btnExportar.Enabled = false;
+            this.rtxtContenido.Text = "Recopilando y calculando estadísticas...";
+        }
+
+        private void FrmEstadisticas_Load(object sender, EventArgs e)
+        {
+            Task.Run(() => { Thread.Sleep(5000); CargarEstadisticas(); });
+        }
+
+        private void CargarEstadisticas()
+        {
+            if (this.rtxtContenido.InvokeRequired)
+            {
+                this.rtxtContenido.BeginInvoke((MethodInvoker)delegate ()
+                {
+                    this.rtxtContenido.Text = calculos.Informacion();
+                    this.btnExportar.Enabled = true;
+                });
+            }
         }
 
         private void btnImportar_Click(object sender, EventArgs e)

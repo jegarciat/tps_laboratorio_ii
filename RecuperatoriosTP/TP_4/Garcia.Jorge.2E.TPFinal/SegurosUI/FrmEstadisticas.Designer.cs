@@ -102,6 +102,7 @@ namespace SegurosUI
             this.Name = "FrmEstadisticas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Estadísticas";
+            this.Load += new System.EventHandler(this.FrmEstadisticas_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

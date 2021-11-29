@@ -85,7 +85,7 @@ namespace Entidades
         /// <param name="total"></param>
         /// <param name="cantidad"></param>
         /// <returns></returns>
-        private static double Porcentaje(double total, double cantidad)
+        public static double Porcentaje(double total, double cantidad)
         {
             double porcentaje = cantidad * 100 / total;
 

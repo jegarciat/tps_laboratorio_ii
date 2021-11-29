@@ -1,5 +1,7 @@
 ﻿using Entidades;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SegurosUI
@@ -19,6 +21,7 @@ namespace SegurosUI
         public FrmGestionPoliza(Poliza poliza) : this()
         {
             this.poliza = poliza;
+            poliza.CostoModificado += Notificar;
         }
 
         private void FrmGestionPoliza_Load(object sender, EventArgs e)
@@ -142,20 +145,22 @@ namespace SegurosUI
                     polizaNueva.TipoVehiculo = (ETipo)cmbTipo.SelectedItem;
 
                     Suscripciones.PolizasVehiculos.Add(polizaNueva);
+                    Task.Run(() => PolizasBD.InsertarPolizaVehiculo(polizaNueva)).Wait();
                 }
                 else
                 {
-                    PolizaVida poliza = new PolizaVida();
+                    PolizaVida polizaNueva = new PolizaVida();
 
-                    poliza.Nombre = txtNombre.Text;
-                    poliza.Apellido = txtApellido.Text;
-                    poliza.DNI = int.Parse(txtDni.Text);
-                    poliza.Sexo = (ESexo)cmbSexo.SelectedItem;
-                    poliza.Edad = int.Parse(txtEdad.Text);
-                    poliza.SumaAsegurada = double.Parse(txtSumaAsegurada.Text);
-                    poliza.Fumador = chkEsFumador.Checked;
+                    polizaNueva.Nombre = txtNombre.Text;
+                    polizaNueva.Apellido = txtApellido.Text;
+                    polizaNueva.DNI = int.Parse(txtDni.Text);
+                    polizaNueva.Sexo = (ESexo)cmbSexo.SelectedItem;
+                    polizaNueva.Edad = int.Parse(txtEdad.Text);
+                    polizaNueva.SumaAsegurada = double.Parse(txtSumaAsegurada.Text);
+                    polizaNueva.Fumador = chkEsFumador.Checked;
 
-                    Suscripciones.PolizasVida.Add(poliza);
+                    Suscripciones.PolizasVida.Add(polizaNueva);
+                    Task.Run(() => PolizasBD.InsertarPolizaVida(polizaNueva)).Wait();
                 }
                 
                 this.DialogResult = DialogResult.OK;
@@ -186,7 +191,6 @@ namespace SegurosUI
                 {
                     polizaVida.Nombre = txtNombre.Text;
                     polizaVida.Apellido = txtApellido.Text;
-                    polizaVida.DNI = int.Parse(txtDni.Text);
                     polizaVida.Sexo = (ESexo)cmbSexo.SelectedItem;
                     polizaVida.Edad = int.Parse(txtEdad.Text);
                     polizaVida.SumaAsegurada = double.Parse(txtSumaAsegurada.Text);
@@ -207,6 +211,15 @@ namespace SegurosUI
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// Método para notificar el evento de la póliza
+        /// </summary>
+        /// <param name="mensaje"></param>
+        private void Notificar(string mensaje)
+        {
+            MessageBox.Show(mensaje);
         }
 
     }

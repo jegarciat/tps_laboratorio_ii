@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Entidades
 {
@@ -108,8 +109,11 @@ namespace Entidades
             if (poliza is PolizaVehiculo)
             {
                 PolizaVehiculo auxiliar = PolizasVehiculos.Find((x) => x.DNI == poliza.DNI);
-                if(PolizasVehiculos.Remove(auxiliar))
+                if (PolizasVehiculos.Remove(auxiliar))
+                {
+                    Task.Run(() => PolizasBD.EliminarPolizaVehiculo(auxiliar.DNI)).Wait();
                     return true;
+                }
                 else
                     throw new Exception();
             }
@@ -117,7 +121,10 @@ namespace Entidades
             {
                 PolizaVida auxiliar = PolizasVida.Find((x) => x.DNI == poliza.DNI);
                 if (PolizasVida.Remove(auxiliar))
+                {
+                    Task.Run(() => PolizasBD.EliminarPolizaVida(auxiliar.DNI)).Wait();
                     return true;
+                }
                 else
                     throw new Exception();
             }

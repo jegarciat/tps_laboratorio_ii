@@ -40,7 +40,8 @@ namespace SegurosUI
             if (frmGestion.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show("Poliza agregada exitosamente", "Cliente asegurado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                dgvPolizas.DataSource = Suscripciones.TodasLasPolizas;
+                dgvPolizas.Update();
+                dgvPolizas.Refresh();
             }
         }
 
@@ -48,15 +49,18 @@ namespace SegurosUI
         {
             if (this.dgvPolizas.SelectedRows.Count > 0)
             {
-                manejador.DataSource = null;
-                manejador.DataSource = dgvPolizas.DataSource;
+                try
+                {
+                    FrmGestionPoliza frmGestion = new FrmGestionPoliza((Poliza)dgvPolizas.CurrentRow.DataBoundItem);
 
-                FrmGestionPoliza frmGestion = new FrmGestionPoliza((Poliza)dgvPolizas.CurrentRow.DataBoundItem);
-
-                if (frmGestion.ShowDialog() == DialogResult.OK)
-                {                    
-                    dgvPolizas.DataSource = manejador;
-                    manejador.ResetBindings(false);
+                    if (frmGestion.ShowDialog() == DialogResult.OK)
+                    {
+                        dgvPolizas.Update();
+                        dgvPolizas.Refresh();
+                    }
+                }
+                catch (Exception)
+                {
                 }
             }
         }
@@ -67,13 +71,10 @@ namespace SegurosUI
             {
                 try
                 {
-                    manejador.DataSource = null;
-                    manejador.DataSource = dgvPolizas.DataSource;
-
                     if (Suscripciones.Eliminar((Poliza)dgvPolizas.CurrentRow.DataBoundItem))
                     {
-                        dgvPolizas.DataSource = manejador;
-                        manejador.ResetBindings(false);
+                        dgvPolizas.Update();
+                        dgvPolizas.Refresh();
                         MessageBox.Show("Póliza eliminada. Recargue la lista para el el cambio.", "Eliminacion exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }

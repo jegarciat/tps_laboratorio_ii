@@ -4,6 +4,8 @@ using System.Xml.Serialization;
 
 namespace Entidades
 {
+    public delegate void CambioDeSumaAsegurada(string mensaje);
+
     [XmlInclude(typeof(PolizaVehiculo))]
     [XmlInclude(typeof(PolizaVida))]
     public abstract class Poliza : IInformacion
@@ -17,6 +19,7 @@ namespace Entidades
         protected int edad;
         protected double sumaAsegurada;
         protected double costo;
+        public event CambioDeSumaAsegurada CostoModificado;
 
         static Poliza()
         {
@@ -38,7 +41,7 @@ namespace Entidades
             this.Apellido = apellido;
             this.Sexo = sexo;
             this.Edad = edad;
-            this.SumaAsegurada = sumaAsegurada;
+            this.sumaAsegurada = sumaAsegurada;
         }
 
         public int DNI
@@ -145,6 +148,13 @@ namespace Entidades
             {
                 if (value > 200000)
                 {
+                    if (value > this.sumaAsegurada && this.sumaAsegurada > 0)
+                        if (CostoModificado is not null)
+                            CostoModificado.Invoke($"{nombre} {apellido} aumento un {Calculos.Porcentaje(sumaAsegurada, value) - 100}% su suma asegurada! El riesgo de la póliza ha aumentado.");
+                    else if(value < this.sumaAsegurada)
+                            if (CostoModificado is not null)
+                                CostoModificado.Invoke($"{nombre} {apellido} disminuyo un {Math.Abs(Calculos.Porcentaje(sumaAsegurada, value) - 100)}% su suma asegurada! El riesgo de la póliza ha disminuido.");
+
                     this.sumaAsegurada = value;
                 }
                 else

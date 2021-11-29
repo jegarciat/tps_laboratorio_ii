@@ -1,6 +1,8 @@
 ﻿using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SegurosUI
@@ -17,14 +19,16 @@ namespace SegurosUI
             txt = new TXT();
         }
 
-        private void FrmPrincipal_Load(object sender, EventArgs e)
+        private async void FrmPrincipal_Load(object sender, EventArgs e)
         {
             try
             {
-                Suscripciones.PolizasVehiculos = Suscripciones.CargarPolizasVehiculos();
-                Suscripciones.PolizasVida = Suscripciones.CargarPolizasVida();
-                dgvPolizas.DataSource = Suscripciones.TodasLasPolizas;
-                manejador.DataSource = dgvPolizas.DataSource;
+                await Task.Run(() => 
+                {
+                    Thread.Sleep(5000); 
+                    CargarListas(); 
+                });
+
                 this.lblTitulo.Text = "TodasLasPolizas";
                 this.lblTitulo.Visible = false;
             }
@@ -32,15 +36,45 @@ namespace SegurosUI
             {
                 MessageBox.Show(exception.Message, "Error al cargar pólizas", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error al cargar pólizas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CargarListas()
+        {
+            try
+            {
+                if (this.dgvPolizas.InvokeRequired && this.lblCargando.InvokeRequired)
+                {
+                    this.dgvPolizas.BeginInvoke((MethodInvoker)delegate ()
+                    {
+                        Suscripciones.PolizasVehiculos = PolizasBD.TraerPolizasVehiculo();
+                        Suscripciones.PolizasVida = PolizasBD.TraerPolizasVida();
+                        dgvPolizas.Visible = true;
+                        this.lblCargando.Visible = false;
+                        dgvPolizas.DataSource = Suscripciones.TodasLasPolizas;
+                        manejador.DataSource = dgvPolizas.DataSource;
+                    });
+                }           
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}. Se cargaron las listas desde el archivo XML", "Error al cargar pólizas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Suscripciones.PolizasVehiculos = Suscripciones.CargarPolizasVehiculos();
+                Suscripciones.PolizasVida = Suscripciones.CargarPolizasVida();
+            }        
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             FrmGestionPoliza frmGestion = new FrmGestionPoliza();
+
             if (frmGestion.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show("Poliza agregada exitosamente", "Cliente asegurado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                dgvPolizas.DataSource = Suscripciones.TodasLasPolizas;
+                ConfigurarPorListado();
             }
         }
 
@@ -48,15 +82,11 @@ namespace SegurosUI
         {
             if (this.dgvPolizas.SelectedRows.Count > 0)
             {
-                manejador.DataSource = null;
-                manejador.DataSource = dgvPolizas.DataSource;
-
                 FrmGestionPoliza frmGestion = new FrmGestionPoliza((Poliza)dgvPolizas.CurrentRow.DataBoundItem);
 
                 if (frmGestion.ShowDialog() == DialogResult.OK)
-                {                    
-                    dgvPolizas.DataSource = manejador;
-                    manejador.ResetBindings(false);
+                {
+                    ConfigurarPorListado();
                 }
             }
         }
@@ -67,13 +97,9 @@ namespace SegurosUI
             {
                 try
                 {
-                    manejador.DataSource = null;
-                    manejador.DataSource = dgvPolizas.DataSource;
-
                     if (Suscripciones.Eliminar((Poliza)dgvPolizas.CurrentRow.DataBoundItem))
                     {
-                        dgvPolizas.DataSource = manejador;
-                        manejador.ResetBindings(false);
+                        ConfigurarPorListado();
                         MessageBox.Show("Póliza eliminada. Recargue la lista para el el cambio.", "Eliminacion exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }

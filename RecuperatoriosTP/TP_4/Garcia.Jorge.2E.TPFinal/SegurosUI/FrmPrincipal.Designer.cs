@@ -54,6 +54,7 @@ namespace SegurosUI
             this.lbl_TituloSeguro = new System.Windows.Forms.Label();
             this.picSeguro = new System.Windows.Forms.PictureBox();
             this.lblMostrar = new System.Windows.Forms.Label();
+            this.lblCargando = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPolizas)).BeginInit();
             this.grpFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSeguro)).BeginInit();
@@ -326,12 +327,23 @@ namespace SegurosUI
             this.lblMostrar.TabIndex = 28;
             this.lblMostrar.Text = "Para exportar una póliza hacer doble click en la fila";
             // 
+            // lblCargando
+            // 
+            this.lblCargando.AutoSize = true;
+            this.lblCargando.Font = new System.Drawing.Font("Segoe UI", 26.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lblCargando.Location = new System.Drawing.Point(212, 277);
+            this.lblCargando.Name = "lblCargando";
+            this.lblCargando.Size = new System.Drawing.Size(334, 47);
+            this.lblCargando.TabIndex = 29;
+            this.lblCargando.Text = "Cargando polizas...";
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Ivory;
             this.ClientSize = new System.Drawing.Size(755, 500);
+            this.Controls.Add(this.lblCargando);
             this.Controls.Add(this.lblMostrar);
             this.Controls.Add(this.picSeguro);
             this.Controls.Add(this.lbl_TituloSeguro);
@@ -387,6 +399,7 @@ namespace SegurosUI
         private System.Windows.Forms.Button btnMoto;
         private System.Windows.Forms.Button btnAuto;
         private System.Windows.Forms.Label lblMostrar;
+        private System.Windows.Forms.Label lblCargando;
     }
 }
 
