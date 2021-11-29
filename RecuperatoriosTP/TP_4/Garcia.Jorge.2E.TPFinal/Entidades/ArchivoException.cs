@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class ClienteException : Exception
+    public class ArchivoException : Exception
     {
-        public ClienteException(string mensaje) : base(mensaje)
+        public ArchivoException(string mensaje) : base(mensaje)
         {
 
         }

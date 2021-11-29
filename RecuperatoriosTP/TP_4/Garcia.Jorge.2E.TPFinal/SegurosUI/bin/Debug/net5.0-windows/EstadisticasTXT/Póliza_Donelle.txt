@@ -1,0 +1,12 @@
+Poliza - Seguro de vida
+Fecha: 28/11/2021
+
+Información del asegurado
+
+DNI: 4632812
+Nombre: Donelle
+Apellido: Fooks
+Edad: 59
+Sexo: Hombre
+Suma asegurada anual: 1000000
+Costo anual: 5000
