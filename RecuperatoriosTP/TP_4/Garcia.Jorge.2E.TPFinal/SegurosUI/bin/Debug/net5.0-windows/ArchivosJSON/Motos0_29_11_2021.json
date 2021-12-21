@@ -1,0 +1,66 @@
+[
+  {
+    "DNI": 32145,
+    "Nombre": "Diego",
+    "Apellido": "Martinez",
+    "Sexo": 2,
+    "Edad": 35,
+    "SumaAsegurada": 654789
+  },
+  {
+    "DNI": 1886192,
+    "Nombre": "Elias",
+    "Apellido": "Cammish",
+    "Sexo": 2,
+    "Edad": 36,
+    "SumaAsegurada": 1000000
+  },
+  {
+    "DNI": 3016539,
+    "Nombre": "Michaela",
+    "Apellido": "Slocket",
+    "Sexo": 2,
+    "Edad": 55,
+    "SumaAsegurada": 1000000
+  },
+  {
+    "DNI": 5105921,
+    "Nombre": "Kellby",
+    "Apellido": "Lisle",
+    "Sexo": 2,
+    "Edad": 30,
+    "SumaAsegurada": 1000000
+  },
+  {
+    "DNI": 5825786,
+    "Nombre": "Bess",
+    "Apellido": "McGibbon",
+    "Sexo": 1,
+    "Edad": 39,
+    "SumaAsegurada": 1000000
+  },
+  {
+    "DNI": 5860867,
+    "Nombre": "Arlette",
+    "Apellido": "Authers",
+    "Sexo": 2,
+    "Edad": 18,
+    "SumaAsegurada": 1000000
+  },
+  {
+    "DNI": 6160362,
+    "Nombre": "Laurie",
+    "Apellido": "Le Count",
+    "Sexo": 1,
+    "Edad": 22,
+    "SumaAsegurada": 1000000
+  },
+  {
+    "DNI": 9999793,
+    "Nombre": "Donovan",
+    "Apellido": "Tyhurst",
+    "Sexo": 2,
+    "Edad": 78,
+    "SumaAsegurada": 1000000
+  }
+]

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPoliza xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Poliza xsi:type="PolizaVehiculo">
+    <DNI>32145</DNI>
+    <Nombre>Diego</Nombre>
+    <Apellido>Martinez</Apellido>
+    <Sexo>Hombre</Sexo>
+    <Edad>35</Edad>
+    <SumaAsegurada>654789</SumaAsegurada>
+    <Anio>2013</Anio>
+    <TipoVehiculo>Moto</TipoVehiculo>
+    <Costo>1309.58</Costo>
+  </Poliza>
+  <Poliza xsi:type="PolizaVehiculo">
+    <DNI>1886192</DNI>
+    <Nombre>Elias</Nombre>
+    <Apellido>Cammish</Apellido>
+    <Sexo>Hombre</Sexo>
+    <Edad>36</Edad>
+    <SumaAsegurada>1000000</SumaAsegurada>
+    <Anio>2004</Anio>
+    <TipoVehiculo>Moto</TipoVehiculo>
+    <Costo>5000</Costo>
+  </Poliza>
+  <Poliza xsi:type="PolizaVehiculo">
+    <DNI>3016539</DNI>
+    <Nombre>Michaela</Nombre>
+    <Apellido>Slocket</Apellido>
+    <Sexo>Hombre</Sexo>
+    <Edad>55</Edad>
+    <SumaAsegurada>1000000</SumaAsegurada>
+    <Anio>2005</Anio>
+    <TipoVehiculo>Moto</TipoVehiculo>
+    <Costo>5000</Costo>
+  </Poliza>
+  <Poliza xsi:type="PolizaVehiculo">
+    <DNI>5105921</DNI>
+    <Nombre>Kellby</Nombre>
+    <Apellido>Lisle</Apellido>
+    <Sexo>Hombre</Sexo>
+    <Edad>30</Edad>
+    <SumaAsegurada>1000000</SumaAsegurada>
+    <Anio>2021</Anio>
+    <TipoVehiculo>Moto</TipoVehiculo>
+    <Costo>800</Costo>
+  </Poliza>
+  <Poliza xsi:type="PolizaVehiculo">
+    <DNI>5825786</DNI>
+    <Nombre>Bess</Nombre>
+    <Apellido>McGibbon</Apellido>
+    <Sexo>Mujer</Sexo>
+    <Edad>39</Edad>
+    <SumaAsegurada>1000000</SumaAsegurada>
+    <Anio>2004</Anio>
+    <TipoVehiculo>Moto</TipoVehiculo>
+    <Costo>5000</Costo>
+  </Poliza>
+  <Poliza xsi:type="PolizaVehiculo">
+    <DNI>5860867</DNI>
+    <Nombre>Arlette</Nombre>
+    <Apellido>Authers</Apellido>
+    <Sexo>Hombre</Sexo>
+    <Edad>18</Edad>
+    <SumaAsegurada>1000000</SumaAsegurada>
+    <Anio>2016</Anio>
+    <TipoVehiculo>Moto</TipoVehiculo>
+    <Costo>1000</Costo>
+  </Poliza>
+  <Poliza xsi:type="PolizaVehiculo">
+    <DNI>6160362</DNI>
+    <Nombre>Laurie</Nombre>
+    <Apellido>Le Count</Apellido>
+    <Sexo>Mujer</Sexo>
+    <Edad>22</Edad>
+    <SumaAsegurada>1000000</SumaAsegurada>
+    <Anio>2007</Anio>
+    <TipoVehiculo>Moto</TipoVehiculo>
+    <Costo>5000</Costo>
+  </Poliza>
+  <Poliza xsi:type="PolizaVehiculo">
+    <DNI>9999793</DNI>
+    <Nombre>Donovan</Nombre>
+    <Apellido>Tyhurst</Apellido>
+    <Sexo>Hombre</Sexo>
+    <Edad>78</Edad>
+    <SumaAsegurada>1000000</SumaAsegurada>
+    <Anio>2014</Anio>
+    <TipoVehiculo>Moto</TipoVehiculo>
+    <Costo>2000</Costo>
+  </Poliza>
+</ArrayOfPoliza>

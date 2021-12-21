@@ -1,0 +1,40 @@
+- Ánalisis de datos -
+
+Fecha: lunes, 29 de noviembre de 2021
+
+Total de pólizas: 41 - 51% en vehiculos y un 48% en vida
+Suma asegurada acumulada 40440201$:
+49.456% de suma asegurada en vida 
+50.544% de suma asegurada en vehiculos
+
+Total de mujeres aseguradas: 19 - un 52% en vida y un 47% en vehiculos
+Total de hombres asegurados - 22 - un 45% en vida y un 54% en vehiculos
+
+Costo acumulado 115394.98999999999$ - un 51.038% en vehiculo y un 48.962% en vida
+Promedio de costo en las pólizas de vida: 2825$
+Promedio de costo en las pólizas de vehiculo: 2804.523$
+Se gana más dinero con los seguros de vehiculos que con los seguros de vida
+
+Promedio de edad de los asegurados: 42 años
+Promedio de edad en las pólizas de vida: 41 años
+Promedio de edad en las pólizas de vehiculo: 44 años
+
+Hombres fumadores: 50%
+Mujeres fumadoras: 50%
+Fumadores mayores de 50 años: 40%
+Mujeres fumadoras mayores de 30 años: 30%
+Hombres fumadores con menos de 35 años: 10%
+
+Porcentaje de mujeres con seguro de moto: 25%
+Porcentaje de hombres con seguro de moto: 75%
+Porcentaje de mujeres con seguro de auto: 50%
+Porcentaje de hombres con seguro de auto: 50%
+Porcentaje de pólizas para camiones: 42%
+Porcentaje de pólizas para moto: 38%
+Porcentaje de pólizas para auto: 19%
+
+Promedio de antiguedad de los vehiculos asegurados: 9.667 años
+Porcentaje de vehiculos asegurados con menos de 6 años de fabricación: 28%
+Porcentaje de vehiculos asegurados con más de 10 años de fabricación: 38%
+
+
